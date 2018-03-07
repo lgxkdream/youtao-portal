@@ -48,10 +48,10 @@
 		</dependency>
 
 		<!-- httpclient -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-		</dependency> -->
+		</dependency>
 
 		<!-- JSP相关 -->
 		<dependency>
