@@ -1,9 +1,12 @@
 package com.youtao.portal.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.youtao.portal.service.IndexService;
 
 /**
  * @title: IndexController
@@ -18,9 +21,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/index")
 public class IndexController {
 	
+	@Autowired
+	private IndexService indexService;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView("index");
+		String advertisement1 = this.indexService.queryAadvertisement1();
+		mv.addObject("advertisement1", advertisement1);
 		return mv;
 	}
 
