@@ -40,7 +40,8 @@ window.pageConfig = window.pageConfig || {}, pageConfig.wideVersion = function()
     var a = location.hostname;
     return /360buy.com/.test(a) ? "360buy.com" : "jd.com"
 }, pageConfig.FN_GetUrl = function(a, b) {
-    return "string" == typeof a ? a : pageConfig.FN_GetDomain(a) + b + ".html"
+	return b;
+//    return "string" == typeof a ? a : pageConfig.FN_GetDomain(a) + b + ".html"
 }, pageConfig.FN_StringFormat = function() {
     var a = arguments[0], b = arguments.length;
     if (b > 0)

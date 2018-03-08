@@ -24,11 +24,20 @@ public class IndexController {
 	@Autowired
 	private IndexService indexService;
 	
+	/**
+	 * 首页展示
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView("index");
+		// 首页轮播大广告
 		String advertisement1 = this.indexService.queryAadvertisement1();
 		mv.addObject("advertisement1", advertisement1);
+		// 楼层中广告
+		String floorAadvertisement2 = this.indexService.queryFloorAadvertisement2();
+		System.out.println(floorAadvertisement2);
+		mv.addObject("floorAadvertisement2", floorAadvertisement2);
 		return mv;
 	}
 
