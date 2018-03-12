@@ -42,7 +42,7 @@
 		factory-bean="requestConfigBuilder" factory-method="build" />
 
 	<!-- 定期关闭无效连接 -->
-	<bean class="com.taotao.portal.httpclient.IdleConnectionEvictor">
+	<bean class="com.youtao.portal.httpclient.IdleConnectionEvictor">
 		<constructor-arg index="0" ref="httpClientConnectionManager" />
 	</bean>
 

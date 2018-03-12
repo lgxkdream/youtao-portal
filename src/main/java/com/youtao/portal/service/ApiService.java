@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.taotao.portal.httpclient.HttpResult;
+import com.youtao.portal.httpclient.HttpResult;
 
 @Service
 public class ApiService implements BeanFactoryAware {

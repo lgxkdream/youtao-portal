@@ -1,4 +1,4 @@
-var TT = TAOTAO = {
+var YT = YOUTAO = {
 	checkLogin : function(){
 		var _ticket = $.cookie("YT_TOKEN");
 		if(!_ticket){
@@ -9,7 +9,7 @@ var TT = TAOTAO = {
 			dataType : "jsonp",
 			type : "GET",
 			success : function(data){
-					var html =data.username+"，欢迎来到淘淘！<a href=\"http://www.taotao.com/user/logout.html\" class=\"link-logout\">[退出]</a>";
+					var html =data.username+"，欢迎来到优淘！<a href=\"http://sso.youtao.com/user/logout.html\" class=\"link-logout\">[退出]</a>";
 					$("#loginbar").html(html);
 			}
 		});
@@ -18,5 +18,5 @@ var TT = TAOTAO = {
 
 $(function(){
 	// 查看是否已经登录，如果已经登录查询登录信息
-	TT.checkLogin();
+	YT.checkLogin();
 });
