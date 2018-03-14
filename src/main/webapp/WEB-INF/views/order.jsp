@@ -28,7 +28,7 @@
 <!--shortcut end-->
 	<form id="orderForm" class="hide">
 		<input type="hidden" name="paymentType" value="1"/>
-			<c:set var="totalPrice"  value="${ item.price}"/>
+			<c:set var="totalPrice"  value="${item.price}"/>
 			<input type="hidden" name="orderItems[0].itemId" value="${item.id}"/>
 			<input type="hidden" name="orderItems[0].num" value="1"/>
 			<input type="hidden" name="orderItems[0].price" value="${item.price}"/>
@@ -44,7 +44,7 @@
 		<input type="hidden" name="orderShipping.receiverAddress" value="三鲁公路3279号 明浦广场 3号楼 205室 "/>
 	</form>
 	<div class="w w1 header clearfix">
-		<div id="logo"><a href="http://www.taotao.com/"><img src="/images/taotao-logo.gif"  alt="优淘商城" /></a></div>
+		<div id="logo"><a href="http://www.youtao.com/"><img src="/images/youtao-logo.png" height="60px" width="200px" alt="优淘商城" /></a></div>
 		<div class="progress clearfix">
 			<ul class="progress-2">
 				<li class="s1"><b></b>1.我的购物车</li>
@@ -71,7 +71,7 @@
 							 <div class="sbox">
 	<div class="s-content">
 	 <p>
-	  		花和尚 &nbsp; 15800007000 &nbsp;  &nbsp; 
+	  		李刚 &nbsp; 15764339496 &nbsp;  &nbsp; 
 		<br/>
 				   上海 闵行区 外环以外  &nbsp;
 				三鲁公路3279号 明浦广场 3号楼 205室 
@@ -162,8 +162,8 @@
 	<tbody>
 		<tr>
 		<td class="fore1">商品</td>
-					<td class="fore2">优淘价</td>
-				<td class="fore3">优惠</td>
+		<td class="fore2">优淘价</td>
+		<td class="fore3">优惠</td>
 		<td class="fore4">数量</td>
 		<td class="fore4">库存状态</td>
 	    </tr>
@@ -220,10 +220,10 @@
 				  <tr>
 				    <td class="fore1">
 					   <div class="p-goods">
-						  <div class="p-img"><a href="http://www.taotao.com/item/${item.id}.html" target='_blank'><img width="52" height="52" src="${item.images[0]}"></a></div>
+						  <div class="p-img"><a href="http://www.youtao.com/item/${item.id}.html" target='_blank'><img width="52" height="52" src="${item.images[0]}"></a></div>
 							 <div class="p-detail">
 								<div class="p-name">
-									<a href="http://www.taotao.com/item/${item.id}.html" target='_blank'>
+									<a href="http://www.youtao.com/item/${item.id}.html" target='_blank'>
 										${item.title }
 								    </a>
 								</div>
