@@ -11,7 +11,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youtao.portal.bean.Order;
+import com.youtao.portal.bean.User;
 import com.youtao.portal.httpclient.HttpResult;
+import com.youtao.portal.interceptor.UserLoginInterceptor;
 
 /**
  * @title: OrderService
@@ -35,6 +37,9 @@ public class OrderService {
 
 	public String submit(Order order) {
 		try {
+			User user = UserLoginInterceptor.getUser();
+			order.setUserId(user.getId());
+			order.setBuyerNick(user.getUsername());
 			HttpResult httpResult = this.apiService.doPost(createOrderUrl, MAPPER.writeValueAsString(order));
 			if (200 == httpResult.getCode().intValue()) {
 				JsonNode jsonNode = MAPPER.readTree(httpResult.getData());

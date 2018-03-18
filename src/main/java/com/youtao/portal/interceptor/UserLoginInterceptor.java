@@ -26,6 +26,7 @@ import com.youtao.portal.service.UserService;
 public class UserLoginInterceptor implements HandlerInterceptor {
 	
 	private static final String COOKIE_NAME = "YT_TOKEN";
+	private static final ThreadLocal<User> LOCAL_USER = new ThreadLocal<User>();
 	
 	@Autowired
 	private UserService userService;
@@ -38,6 +39,7 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 			User user = userService.queryUserByToken(token);
 			if (!Objects.isNull(user)) {
 				// 处于登录状态
+				LOCAL_USER.set(user);
 				return true;
 			}
 			// 处于登录超时状态
@@ -55,6 +57,11 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
+		LOCAL_USER.remove();
+	}
+	
+	public static User getUser() {
+		return LOCAL_USER.get();
 	}
 
 }

@@ -8,6 +8,15 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youtao.portal.bean.User;
 
+/**
+ * @title: UserService
+ * @description: 用户Service
+ * @Copyright: Copyright (c) 2018
+ * @Company: lgxkdream.github.io
+ * @author gang.li
+ * @version 1.0.0
+ * @since 2018年3月18日 下午1:13:25
+ */
 @Service
 public class UserService {
 	

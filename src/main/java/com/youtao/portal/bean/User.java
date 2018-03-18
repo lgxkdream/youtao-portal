@@ -2,6 +2,15 @@ package com.youtao.portal.bean;
 
 import java.util.Date;
 
+/**
+ * @title: User
+ * @description: 用户实体
+ * @Copyright: Copyright (c) 2018
+ * @Company: lgxkdream.github.io
+ * @author gang.li
+ * @version 1.0.0
+ * @since 2018年3月18日 下午1:13:08
+ */
 public class User {
 
     private Long id;
