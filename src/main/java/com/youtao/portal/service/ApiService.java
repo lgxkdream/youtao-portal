@@ -3,10 +3,12 @@ package com.youtao.portal.service;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
@@ -17,6 +19,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -91,7 +95,7 @@ public class ApiService implements BeanFactoryAware {
 	 * @throws IOException
 	 */
 	public HttpResult doPost(String url) throws ParseException, IOException {
-		return this.doPost(url, null);
+		return this.doPost(url, new HashMap<String, String>());
 	}
 
 	/**
@@ -125,6 +129,44 @@ public class ApiService implements BeanFactoryAware {
 			int statusCode = response.getStatusLine().getStatusCode();
 			HttpEntity entity = response.getEntity();
 
+			if (Objects.isNull(entity)) {
+				return new HttpResult(statusCode, null);
+			}
+			return new HttpResult(statusCode, EntityUtils.toString(response.getEntity(), "UTF-8"));
+		} finally {
+			if (response != null) {
+				response.close();
+			}
+		}
+	}
+	
+	/**
+	 * 带有json参数的POST请求
+	 * @param url 请求路径
+	 * @param jsonParam json参数
+	 * @return
+	 * @throws ParseException
+	 * @throws IOException
+	 */
+	public HttpResult doPost(String url, String jsonParam) throws ParseException, IOException {
+		// 创建http POST请求
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setConfig(requestConfig);
+		
+		if (StringUtils.isNotBlank(jsonParam)) {
+			// 构造一个json string式的实体
+			StringEntity stringEntity = new StringEntity(jsonParam, ContentType.APPLICATION_JSON);
+			// 将请求实体设置到httpPost对象中
+			httpPost.setEntity(stringEntity);
+		}
+		
+		CloseableHttpResponse response = null;
+		try {
+			// 执行请求获取结果
+			response = this.getHttpclient().execute(httpPost);
+			int statusCode = response.getStatusLine().getStatusCode();
+			HttpEntity entity = response.getEntity();
+			
 			if (Objects.isNull(entity)) {
 				return new HttpResult(statusCode, null);
 			}

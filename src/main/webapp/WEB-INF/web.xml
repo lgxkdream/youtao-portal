@@ -45,6 +45,10 @@
         <!-- 伪静态：有利于搜索引擎优化(SEO) -->
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>youtao-portal</servlet-name>
+        <url-pattern>/service/*</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
