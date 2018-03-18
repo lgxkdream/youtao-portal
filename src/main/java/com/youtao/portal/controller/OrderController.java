@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -70,9 +72,18 @@ public class OrderController {
 		return result;
 	}
 	
+	/**
+	 * 下单成功页面
+	 * @param orderId 订单id
+	 * @return
+	 */
 	@RequestMapping(value = "success", method = RequestMethod.GET)
-	public String success() {
-		return "success";
+	public ModelAndView success(@RequestParam("id") String orderId) {
+		ModelAndView mv = new ModelAndView("success");
+		Order order = this.orderService.queryOrderById(orderId);
+		mv.addObject("order", order); // 订单详情
+		mv.addObject("date", new DateTime().plusDays(3).toString("MM月dd日")); // 预计送货时间
+		return mv;
 	}
 
 }

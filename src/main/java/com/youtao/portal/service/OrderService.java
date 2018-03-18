@@ -1,13 +1,10 @@
 package com.youtao.portal.service;
 
-import java.io.IOException;
-
-import org.apache.http.ParseException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youtao.portal.bean.Order;
@@ -34,7 +31,15 @@ public class OrderService {
 	
 	@Value("${order.create.url}")
 	private String createOrderUrl;
+	
+	@Value("${order.query.url}")
+	private String queryOrderUrl;
 
+	/**
+	 * 订单提交
+	 * @param order
+	 * @return
+	 */
 	public String submit(Order order) {
 		try {
 			User user = UserLoginInterceptor.getUser();
@@ -46,6 +51,24 @@ public class OrderService {
 				if (200 == jsonNode.get("status").intValue()) {
 					return jsonNode.get("data").asText();
 				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 订单查询
+	 * @param orderId 订单id
+	 * @return
+	 */
+	public Order queryOrderById(String orderId) {
+		try {
+			String jsonData = this.apiService.doGet(queryOrderUrl + orderId);
+			if (StringUtils.isNotBlank(jsonData)) {
+				Order order = MAPPER.readValue(jsonData, Order.class);
+				return order;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
